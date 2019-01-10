@@ -11,7 +11,6 @@ add all the files al git repo
 git init
 git add . 
 git commit -a -m "adding properties"
-
 ```
 
 setup the path to this folder in the "config" application.properties, for instance:
