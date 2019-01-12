@@ -1,5 +1,10 @@
 https://www.baeldung.com/spring-cloud-bootstrapping
 
+This cloud example has a lot of thicky parts:
+
+# I: setup a git repo to store the configuration files of the servers
+Create a folder, init a git repo and add the properties files.
+
 create a git repo in a folder.
 in this folder create the next files: 
 - discovery.properties
@@ -17,6 +22,35 @@ setup the path to this folder in the "config" application.properties, for instan
 ```bash
 spring.cloud.config.server.git.uri = file://Users/your-user/IntellijProjects/xxx-folder-xxx
 ``` 
+
+# II: setup the config service properly
+
+In the config service project, go to the application.properties:
+- first comment the discovery properties
+- in the config application, comment the eureka annotation
+- and run the config server
+- in this way the config runs without looking up for the discovery service
+- then run the discovery server
+- in order to run the exercise we need to register this config in the discovery service
+- so we have to uncomment the commented properties and run another time the config service
+
+
+# III: run the whole cloud
+
+run: 
+- config service without discovery client
+- discovery service
+- config service with discovery client
+- gateway service
+- book-service
+- ratings-service
+
+```html
+http://192.168.1.42:8080/book-service/books/1
+http://192.168.1.42:8080/book-service/books/all
+http://192.168.1.42:8080/rating-service/ratings/1
+http://192.168.1.42:8080/rating-service/ratings/all
+```
 
 ### Versioning 
 
