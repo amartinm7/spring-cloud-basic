@@ -1,25 +1,23 @@
 package com.amm.cloud.basic.bk.ratingservice.domain;
 
+import javax.persistence.*;
+
 public class Rating {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(nullable = false, unique = true)
     private Long bookId;
+
+    @Column(nullable = false)
     private int stars;
 
-    public Rating(){
-        super();
-    }
-
-    public Rating(Long id, Long bookId, int stars) {
-        this.id = id;
-        this.bookId = bookId;
-        this.stars = stars;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -37,15 +35,5 @@ public class Rating {
 
     public void setStars(int stars) {
         this.stars = stars;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Rating{");
-        sb.append("id=").append(id);
-        sb.append(", bookId=").append(bookId);
-        sb.append(", stars=").append(stars);
-        sb.append('}');
-        return sb.toString();
     }
 }
