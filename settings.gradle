@@ -1,2 +1,4 @@
 rootProject.name = 'book-service'
+include 'cloud-05-rating-service'
+findProject(':cloud-05-rating-service')?.name = 'rating-service'
 
