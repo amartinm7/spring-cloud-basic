@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.1.RELEASE'
+		springBootVersion = '2.1.2.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -14,7 +14,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.amm.cloud.basic.cfg'
+group = 'com.amm.cloud.basic.bk'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -28,8 +28,10 @@ ext {
 }
 
 dependencies {
-	implementation 		'org.springframework.cloud:spring-cloud-config-server'
-	testImplementation 	'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 dependencyManagement {
