@@ -1,15 +1,9 @@
 package com.amm.cloud.basic.bk.ratingservice.interfaces;
 
 import com.amm.cloud.basic.bk.ratingservice.domain.Rating;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ratings")
@@ -22,9 +16,9 @@ public class RatingController {
             new Rating(4L, 2L, 5)
     );
 
-    @GetMapping("")
-    public List<Rating> findRatingsByBookId(@RequestParam Long bookId) {
-        return bookId == null || bookId.equals(0L) ? Collections.EMPTY_LIST : ratingList.stream().filter(r -> r.getBookId().equals(bookId)).collect(Collectors.toList());
+    @GetMapping("/{ratingId}")
+    public Rating findRatingsByBookId(@PathVariable Long ratingId) {
+        return ratingList.stream().filter(b -> b.getId().equals(ratingId)).findFirst().orElse(new Rating(1L, 1L, 2));
     }
 
     @GetMapping("/all")

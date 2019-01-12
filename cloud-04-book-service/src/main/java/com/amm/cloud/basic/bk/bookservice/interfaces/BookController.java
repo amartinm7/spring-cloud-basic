@@ -17,13 +17,13 @@ public class BookController {
             new Book(2L, "Second Author", "two title")
     );
 
-    @GetMapping("")
+    @GetMapping("/all")
     public List<Book> findAllBooks() {
         return bookList;
     }
 
     @GetMapping("/{bookId}")
     public Book findBook(@PathVariable Long bookId) {
-        return bookList.stream().filter(b -> b.getId().equals(bookId)).findFirst().orElse(null);
+        return bookList.stream().filter(b -> b.getId().equals(bookId)).findFirst().orElse(new Book(1L, "default Author", "another default title"));
     }
 }
