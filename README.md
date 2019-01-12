@@ -46,11 +46,13 @@ run:
 - ratings-service
 
 ```html
+http://192.168.1.42:8082
 http://192.168.1.42:8080/book-service/books/1
 http://192.168.1.42:8080/book-service/books/all
 http://192.168.1.42:8080/rating-service/ratings/1
 http://192.168.1.42:8080/rating-service/ratings/all
 ```
+important, console discovery service in http://192.168.1.42:8082 
 
 ### Versioning 
 
