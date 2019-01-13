@@ -3,6 +3,7 @@ package com.amm.cloud.basic.gtwy.gateway.infrastructure;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.Session;
 import org.springframework.session.SessionRepository;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,9 @@ public class SessionSavingZuulPreFilter
         return true; }
     @Override
     public Object run() {
-        RequestContext context = RequestContext.getCurrentContext(); HttpSession httpSession = context.getRequest().getSession(); Session session = repository.getSession(httpSession.getId());
+        RequestContext context = RequestContext.getCurrentContext();
+        HttpSession httpSession = context.getRequest().getSession();
+        Session session = repository.getSession(httpSession.getId());
         context.addZuulRequestHeader(
                 "Cookie", "SESSION=" + httpSession.getId());
         return null; }

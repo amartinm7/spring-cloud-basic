@@ -35,6 +35,8 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.2.0'
+	compile "org.springframework.boot:spring-boot-starter-security"
+
 
 }
 

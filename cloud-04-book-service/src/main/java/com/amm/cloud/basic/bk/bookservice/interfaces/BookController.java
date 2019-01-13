@@ -1,56 +1,34 @@
 package com.amm.cloud.basic.bk.bookservice.interfaces;
 
+import com.amm.cloud.basic.bk.bookservice.application.BookService;
 import com.amm.cloud.basic.bk.bookservice.domain.Book;
-import com.amm.cloud.basic.bk.bookservice.domain.BookRepository;
-import com.amm.cloud.basic.bk.bookservice.infrastructure.exception.BookIdMismatchException;
-import com.amm.cloud.basic.bk.bookservice.infrastructure.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
     @Autowired
-    private BookRepository bookRepository;
-
+    private BookService bookService;
     @GetMapping
-    public Iterable<Book> findAll(){
-        return bookRepository.findAll();
-    }
-
-    @GetMapping("/title/{bookTitle}")
-    public List<Book> findByTitle(@PathVariable String bookTitle){
-        return bookRepository.findByTitle(bookTitle);
-    }
-
-    @GetMapping("/{id}")
-    public Book findOne(@PathVariable Long id){
-        return bookRepository.findById(id).orElseThrow(BookNotFoundException::new);
-    }
-
+    public List<Book> findAllBooks() {
+        return bookService.findAllBooks(); }
+    @GetMapping("/{bookId}")
+    public Book findBook(@PathVariable Long bookId) {
+        return bookService.findBookById(bookId); }
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Book create(@RequestBody Book book) {
-        return bookRepository.save(book);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-        bookRepository.deleteById(id);
-    }
-
-    @PutMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable Long id) {
-        if (book.getId() != id) {
-            throw new BookIdMismatchException();
-        }
-        bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-        return bookRepository.save(book);
-    }
+    public Book createBook(@RequestBody Book book) {
+        return bookService.createBook(book); }
+    @DeleteMapping("/{bookId}")
+    public void deleteBook(@PathVariable Long bookId) {
+        bookService.deleteBook(bookId); }
+    @PutMapping("/{bookId}")
+    public Book updateBook(@RequestBody Book book, @PathVariable Long bookId) {
+        return bookService.updateBook(book, bookId); }
+    @PatchMapping("/{bookId}") public Book updateBook(
+            @RequestBody Map<String, String> updates, @PathVariable Long bookId) {
+        return bookService.updateBook(updates, bookId); }
 }

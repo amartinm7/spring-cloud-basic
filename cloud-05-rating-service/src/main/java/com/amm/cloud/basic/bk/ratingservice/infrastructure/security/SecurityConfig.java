@@ -18,7 +18,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic() .disable()
-                .authorizeRequests() .regexMatchers("^/ratings\\?bookId.*$").authenticated() .antMatchers(HttpMethod.POST,"/ratings").authenticated() .antMatchers(HttpMethod.PATCH,"/ratings/*").hasRole("ADMIN") .antMatchers(HttpMethod.DELETE,"/ratings/*").hasRole("ADMIN") .antMatchers(HttpMethod.GET,"/ratings").hasRole("ADMIN") .anyRequest().authenticated()
+                .authorizeRequests() .regexMatchers("^/ratings\\?bookId.*$").authenticated()
+                .antMatchers(HttpMethod.POST,"/ratings").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/ratings/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/ratings/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/ratings").hasRole("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .csrf() .disable();
     }
