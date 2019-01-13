@@ -77,6 +77,9 @@ in the dependencies field, write JPA and H2. After that, generate the project.
 You can use the scaffolding straightly in intellij.
 
 ## reference starting point
+
+https://github.com/eugenp/tutorials/tree/master/spring-cloud/spring-cloud-bootstrap
+
 https://www.baeldung.com/spring-boot-start
 
 https://www.baeldung.com/spring-cloud-bootstrapping
